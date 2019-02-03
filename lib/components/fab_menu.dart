@@ -21,6 +21,7 @@ class FloatingActionButtonMenuState extends State<FloatingActionButtonMenu>
 
   AnimationController _animationController;
   Animation<double> _iconAnimation;
+  bool _isMenuVisible = false;
 
   FloatingActionButtonMenuState(actions) : _actions = actions;
 
@@ -43,15 +44,30 @@ class FloatingActionButtonMenuState extends State<FloatingActionButtonMenu>
     super.dispose();
   }
 
+  handleMenuAnimate() {
+    if (_isMenuVisible) {
+      _animationController.reverse();
+    } else {
+      _animationController.forward();
+    }
+
+    _isMenuVisible = !_isMenuVisible;
+  }
+
+  Widget menuToggleButton() => new FloatingActionButton(
+        onPressed: handleMenuAnimate,
+        tooltip: 'Increment',
+        child: AnimatedIcon(
+          icon: AnimatedIcons.menu_close,
+          progress: _iconAnimation,
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
-    return new FloatingActionButton(
-      onPressed: () {},
-      tooltip: 'Increment',
-      child: AnimatedIcon(
-        icon: AnimatedIcons.menu_close,
-        progress: _iconAnimation,
-      ),
+    return Column(
+      children: _actions + <Widget>[menuToggleButton()],
+      mainAxisAlignment: MainAxisAlignment.end,
     );
   }
 }

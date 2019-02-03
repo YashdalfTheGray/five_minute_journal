@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class FloatingActionButtonMenu extends StatefulWidget {
-  final List<FloatingActionButton> _actions;
+  final List<Widget> _actions;
 
-  FloatingActionButtonMenu(actions) : _actions = actions;
+  FloatingActionButtonMenu(actions) : _actions = actions {
+    if (!(_actions.every((a) => a is FloatingActionButton && a.mini))) {
+      throw new ArgumentError(
+          'Each action should be of type FloatingActionButton and have the mini property set to true.');
+    }
+  }
 
   @override
   FloatingActionButtonMenuState createState() =>
@@ -12,7 +17,7 @@ class FloatingActionButtonMenu extends StatefulWidget {
 
 class FloatingActionButtonMenuState extends State<FloatingActionButtonMenu>
     with SingleTickerProviderStateMixin {
-  final List<FloatingActionButton> _actions;
+  final List<Widget> _actions;
 
   AnimationController _animationController;
   Animation<double> _iconAnimation;

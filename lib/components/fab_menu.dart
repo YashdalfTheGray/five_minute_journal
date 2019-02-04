@@ -21,6 +21,7 @@ class FloatingActionButtonMenuState extends State<FloatingActionButtonMenu>
 
   AnimationController _animationController;
   Animation<double> _iconAnimation;
+  Animation<double> _buttonAnimation;
   bool _isMenuVisible = false;
 
   FloatingActionButtonMenuState(actions) : _actions = actions;
@@ -35,6 +36,12 @@ class FloatingActionButtonMenuState extends State<FloatingActionButtonMenu>
 
     _iconAnimation =
         new Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
+
+    _buttonAnimation = new Tween<double>(begin: 56.0, end: -14.0).animate(
+        new CurvedAnimation(
+            parent: _animationController,
+            curve: new Interval(0.0, 0.75, curve: Curves.easeOut)));
+
     super.initState();
   }
 

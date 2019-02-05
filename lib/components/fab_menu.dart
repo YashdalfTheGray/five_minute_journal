@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:five_minute_journal/utils/better_collection_functions.dart';
 
 class FloatingActionButtonMenu extends StatefulWidget {
   final List<Widget> _actions;
@@ -72,8 +73,15 @@ class FloatingActionButtonMenuState extends State<FloatingActionButtonMenu>
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> actionsToAdd = betterMap(
+        _actions.reversed,
+        (a, i, l) => new Transform(
+              transform: Matrix4.translationValues(
+                  0.0, _buttonAnimation.value * i, 0.0),
+              child: a,
+            )).reversed as List<Widget>;
     return Column(
-      children: _actions + <Widget>[menuToggleButton()],
+      children: actionsToAdd + <Widget>[menuToggleButton()],
       mainAxisAlignment: MainAxisAlignment.end,
     );
   }

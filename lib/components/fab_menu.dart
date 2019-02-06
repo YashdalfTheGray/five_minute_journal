@@ -73,13 +73,13 @@ class FloatingActionButtonMenuState extends State<FloatingActionButtonMenu>
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> actionsToAdd = betterMap(
+    final List<Widget> actionsToAdd = betterMap<Widget>(
         _actions.reversed,
         (a, i, l) => new Transform(
               transform: Matrix4.translationValues(
                   0.0, _buttonAnimation.value * i, 0.0),
               child: a,
-            )).reversed as List<Widget>;
+            )).reversed;
     return Column(
       children: actionsToAdd + <Widget>[menuToggleButton()],
       mainAxisAlignment: MainAxisAlignment.end,

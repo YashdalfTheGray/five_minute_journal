@@ -1,8 +1,20 @@
 List<T> betterMap<T>(List<T> list, T func(T value, int index, List<T> list)) {
   final result = new List<T>();
 
-  for (var i = 0; i < list.length; i++) {
+  for (int i = 0; i < list.length; i++) {
     result.add(func(list[i], i, list));
+  }
+
+  return result;
+}
+
+List<T> filter<T>(List<T> list, bool tester(T value, int index, List<T> list)) {
+  final result = new List<T>();
+
+  for (int i = 0; i < list.length; i++) {
+    if (tester(list[i], i, list)) {
+      result.add(list[i]);
+    }
   }
 
   return result;

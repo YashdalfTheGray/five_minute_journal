@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:five_minute_journal/components/fab_menu.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -76,11 +77,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: FloatingActionButtonMenu(<Widget>[
+        FloatingActionButton(
+            onPressed: _incrementCounter,
+            tooltip: 'Increment',
+            child: Icon(Icons.add),
+            mini: true)
+      ]), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
